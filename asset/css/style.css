@@ -1,0 +1,278 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  margin-top: 3em;
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+header div img {
+  width: 370px;
+}
+
+section {
+  margin: 0 4em 0 4em;
+}
+
+.ingredient,
+.ingredient button,
+.ingredient input,
+.ingredient input::placeholder,
+.ingredient .dropdown-menu {
+  background-color: #3282f7;
+  color: #ffffff;
+}
+
+.appliance,
+.appliance button,
+.appliance input,
+.appliance input::placeholder,
+.appliance .dropdown-menu {
+  background-color: #68d9a4;
+  color: #ffffff;
+}
+
+.ustensil,
+.ustensil button,
+.ustensil input,
+.ustensil input::placeholder,
+.ustensil .dropdown-menu {
+  background-color: #ed6454;
+  color: #ffffff;
+}
+
+.dropdown input::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.search-field {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.search-field input {
+  height: 70px;
+  width: 100%;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+
+  padding-left: 1em;
+}
+
+.search-field input::placeholder {
+  border: none;
+}
+
+.search-field em {
+  position: absolute;
+  top: 0.55em;
+  right: 0.6em;
+  width: 32px;
+  height: 32px;
+  font-size: 2.2em;
+}
+
+.selected-filters {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.selected-filters .filter {
+  position: relative;
+  font-size: 18px;
+  min-width: 50px;
+  max-height: 37px;
+  min-height: 37px;
+  padding-top: 12px;
+  padding-left: 20px;
+  padding-right: 50px;
+  border-radius: 6px;
+}
+
+.selected-filters .filter em {
+  position: absolute;
+  right: 1em;
+  top: 0.8em;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  border-radius: 6px;
+  font-size: 18px;
+  min-height: 69px;
+  max-height: 69px;
+  max-width: 700px;
+}
+
+.dropdown button {
+  position: relative;
+  border-radius: 6px;
+  width: 170px;
+  height: 69px;
+  font-size: 18px;
+  border: none;
+}
+
+.dropdown .guess-filter {
+  display: none;
+}
+
+.dropdown.active button {
+  display: none;
+}
+
+.dropdown.active .guess-filter {
+  display: block;
+}
+
+.dropdown-menu {
+  position: static;
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding-left: 0.7em;
+  border-radius: 0 0 6px 6px;  
+  list-style: none;
+}
+
+.dropdown-menu li {
+  min-width: 225px;
+  max-width: 225px;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.dropdown.active .dropdown-menu {
+  display: flex;
+}
+
+.dropdown button span {
+  position: absolute;
+  left: 0.7em;
+  top: 1.4em;
+}
+
+.guess-filter {
+  position: relative;
+}
+
+.guess-filter input {
+  min-width: 75%;
+  margin-right: 4em;
+  height: 2em;
+  margin-top: 1.5em;
+  margin-left: 0.7em;
+  border: none;
+  outline: none;
+}
+
+.guess-filter input:focus {
+  border: none;
+  outline: none;
+}
+
+.dropdown button em,
+.guess-filter em {
+  position: absolute;
+  right: 1em;
+  top: 1.5em;
+}
+
+.dropdown .guess-filter {
+  min-width: 170px;
+}
+
+.filter-selector {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+  margin-bottom: 1em;
+}
+
+.recipe-list-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-bottom: 1em;
+  column-gap: 1.7em;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-bottom: 1em;
+  height: 370px;
+  width: 380px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 180px;
+  background-color: #C7BEBE;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.recipe-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;  
+  background-color: #E7E7E7;
+  width: 100%;
+}
+
+.recipe-header h3, .recipe-header .recipe-time {
+  margin: 0;
+  padding: 0.5em;
+}
+
+.recipe-content{
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  background-color: #E7E7E7;
+  padding-bottom: 1em;
+  
+  width: 100%;
+}
+
+.recipe-content ul,.recipe-content p{
+  width: 170px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.recipe-content ul{
+  list-style: none;  
+  margin-left: 1em;
+}
+
+.recipe-content ul li{  
+  text-decoration: none;
+  overflow: hidden;
+}
+
