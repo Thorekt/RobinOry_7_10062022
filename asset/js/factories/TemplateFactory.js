@@ -14,7 +14,8 @@ class TemplateFactory {
     recipeTimeZone.classList.add("recipe-time");
 
     const recipeTimeIcon = document.createElement("em");
-    recipeTimeIcon.classList.add("bi bi-clock");
+    recipeTimeIcon.classList.add("bi");
+    recipeTimeIcon.classList.add("bi-clock");
     const recipeTimeValue = document.createElement("span");
     recipeTimeValue.classList.add("recipe-time-value");
     const recipeTimeText = document.createElement("span");
@@ -23,7 +24,7 @@ class TemplateFactory {
     recipeHeader.append(recipeTitle, recipeTimeZone);
 
     const recipeContentZone = document.createElement("div");
-    recipeContent.classList.add("recipe-content");
+    recipeContentZone.classList.add("recipe-content");
 
     const recipeIngredient = document.createElement("ul");
     const recipeProcess = document.createElement("p");
@@ -34,13 +35,28 @@ class TemplateFactory {
     return recipeCard;
   }
 
+  static getIngredientRecipeRowTemplate(){
+    const ingredientRow = document.createElement("li");
+    const ingredientName = document.createElement("span");
+    ingredientName.classList.add("ingredient-name");
+    const ingredientQuantity = document.createElement("span");
+    ingredientQuantity.classList.add("ingredient-quantity");
+    const ingredientUnit = document.createElement("span");
+    ingredientUnit.classList.add("ingredient-unit");
+
+    ingredientRow.append(ingredientName, ingredientQuantity, ingredientUnit);
+    return ingredientRow;
+  }
+
+
   static getSelectedFilterTemplate() {
     const filter = document.createElement("div");
-    filter.className.add("filter");
+    filter.classList.add("filter");
 
     const filterText = document.createElement("span");
     const filterCloseIcon = document.createElement("em");
-    filterCloseIcon.classList.add("bi bi-x-circle");
+    filterCloseIcon.classList.add("bi");
+    filterCloseIcon.classList.add("bi-x-circle");
 
     filter.append(filterText, filterCloseIcon);
 

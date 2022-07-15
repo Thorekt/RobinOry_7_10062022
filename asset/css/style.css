@@ -205,7 +205,7 @@ section {
   flex-direction: row;
   gap: 1em;
 
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 .recipe-list-section {
@@ -213,8 +213,7 @@ section {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: start;
-  margin-bottom: 1em;
-  column-gap: 1.7em;
+  column-gap: 4.95em;
 }
 
 .recipe-card {
@@ -222,9 +221,10 @@ section {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: start;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   height: 370px;
-  width: 380px;
+  width: 380px;  
+  background-color: #E7E7E7;
 }
 
 .recipe-image {
@@ -239,6 +239,8 @@ section {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 18px;  
   background-color: #E7E7E7;
   width: 100%;
@@ -249,21 +251,40 @@ section {
   padding: 0.5em;
 }
 
+.recipe-header h3{
+  font-size: 18px;
+  font-weight:500;
+  max-height: 18px;
+  display: inline-block;
+  overflow: hidden;  
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+.recipe-header .recipe-time{
+  min-width: 75px;
+}
+
 .recipe-content{
   display: flex;
   flex-direction: row;
   font-size: 12px;
   background-color: #E7E7E7;
   padding-bottom: 1em;
-  
+  text-overflow: ellipsis;
   width: 100%;
+  max-width:100%;
+  max-height: 110px;  
+  gap:10px;
 }
 
 .recipe-content ul,.recipe-content p{
   width: 170px;
+  max-width: 170px;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recipe-content ul{
@@ -273,6 +294,13 @@ section {
 
 .recipe-content ul li{  
   text-decoration: none;
+  width: 170px;
+  max-width: 170px;
   overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
+li .ingredient-name{
+  font-weight: 600;
+}
