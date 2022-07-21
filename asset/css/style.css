@@ -123,7 +123,7 @@ section {
   border: none;
 }
 
-.dropdown .guess-filter {
+.dropdown .dropdown-search {
   display: none;
 }
 
@@ -131,7 +131,7 @@ section {
   display: none;
 }
 
-.dropdown.active .guess-filter {
+.dropdown.active .dropdown-search {
   display: block;
 }
 
@@ -170,11 +170,11 @@ section {
   top: 1.4em;
 }
 
-.guess-filter {
+.dropdown-search {
   position: relative;
 }
 
-.guess-filter input {
+.dropdown-search input {
   min-width: 75%;
   margin-right: 4em;
   height: 2em;
@@ -184,19 +184,19 @@ section {
   outline: none;
 }
 
-.guess-filter input:focus {
+.dropdown-search input:focus {
   border: none;
   outline: none;
 }
 
 .dropdown button em,
-.guess-filter em {
+.dropdown-search em {
   position: absolute;
   right: 1em;
   top: 1.5em;
 }
 
-.dropdown .guess-filter {
+.dropdown .dropdown-search {
   min-width: 170px;
 }
 

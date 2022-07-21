@@ -1,12 +1,12 @@
 class Index {
   constructor(recipeList) {
     this.recipeList = recipeList;
-    this.usedRecipeList = this.recipeList;
+    this.recipeListToDisplay = this.recipeList;
     this.selectedIngredient = [];
     this.selectedAppliance = [];
     this.selectedUstensil = [];
 
-    this.gatherUsefullData();
+    this.gatherFilterData();
 
     this.initDOM();
     this.initEvent();
@@ -17,9 +17,20 @@ class Index {
   initDOM() {
     this.selectedFilterList = document.querySelector(".selected-filters");
 
+    this.searchField = document.querySelector(".search-field input");
+
     this.dropdownIngredient = document.querySelector(".dropdown.ingredient");
+    this.dropdownIngredientSearch = this.dropdownIngredient.querySelector(
+      ".dropdown-search input"
+    );
     this.dropdownAppliance = document.querySelector(".dropdown.appliance");
+    this.dropdownApplianceSearch = this.dropdownAppliance.querySelector(
+      ".dropdown-search input"
+    );
     this.dropdownUstensil = document.querySelector(".dropdown.ustensil");
+    this.dropdownUstensilSearch = this.dropdownUstensil.querySelector(
+      ".dropdown-search input"
+    );
 
     this.recipeSection = document.querySelector(".recipe-list-section");
   }
@@ -35,7 +46,7 @@ class Index {
       });
 
       dropdown
-        .querySelector(".guess-filter em")
+        .querySelector(".dropdown-search em")
         .addEventListener("click", () => {
           this.toggleDropdown(dropdown);
         });
@@ -46,6 +57,69 @@ class Index {
         this.closeAllDropdown();
       }
     });
+
+    this.searchField.addEventListener("input", () => {
+      this.searchRecipe();
+    });
+
+    this.dropdownIngredientSearch.addEventListener("input", () => {
+      this.searchIngredient();
+    });
+    this.dropdownApplianceSearch.addEventListener("input", () => {
+      this.searchAppliance();
+    });
+    this.dropdownUstensilSearch.addEventListener("input", () => {
+      this.searchUstensil();
+    });
+  }
+
+  searchRecipe() {
+    if (this.searchField.value.length < 3) {
+      this.recipeListToDisplay = this.recipeList;
+    } else {
+      //do job with searchField
+    }
+
+    this.gatherFilterData();
+    this.fillRecipeList();
+  }
+
+  searchFiltersInList(listFilter, searchValue) {
+    let resultList = [];
+    if(searchValue.length < 1) {
+      return listFilter;
+    }
+
+    //do job with listFilter
+
+    return resultList;
+  }
+
+  searchIgredient() {
+    let searchValue = this.dropdownIngredientSearch.value;
+    let resultList = this.searchFiltersInList(
+      this.usedIngredientList,
+      searchValue
+    );
+    this.fillDropdownIngredient(resultList);
+  }
+
+  searchAppliance() {
+    let searchValue = this.dropdownApplianceSearch.value;
+    let resultList = this.searchFiltersInList(
+      this.usedApplianceList,
+      searchValue
+    );
+    this.fillDropdownAppliance(resultList);
+  }
+
+  searchUstensil() {
+    let searchValue = this.dropdownUstensilSearch.value;
+    let resultList = this.searchFiltersInList(
+      this.usedUstensilList,
+      searchValue
+    );
+    this.fillDropdownUstensil(resultList);
   }
 
   fillDOM() {
@@ -56,9 +130,9 @@ class Index {
     this.fillRecipeList();
   }
 
-  gatherUsefullData() {
+  gatherFilterData() {
     let ingredientList = [];
-    ingredientList = this.recipeList
+    ingredientList = this.recipeListToDisplay
       .map((recipe) => {
         return recipe.ingredients
           .map((ingredient) => {
@@ -67,18 +141,20 @@ class Index {
           .flat();
       })
       .flat();
-    this.ingredientListUnique = [...new Set(ingredientList)];
+    this.usedIngredientList = [];
+    this.usedIngredientList = [...new Set(ingredientList)];
 
     let applianceList = [];
-    applianceList = this.recipeList
+    applianceList = this.recipeListToDisplay
       .map((recipe) => {
         return recipe.appliance;
       })
       .flat();
-    this.applianceListUnique = [...new Set(applianceList)];
+    this.usedApplianceList = [];
+    this.usedApplianceList = [...new Set(applianceList)];
 
     let ustencilList = [];
-    ustencilList = this.recipeList
+    ustencilList = this.recipeListToDisplay
       .map((recipe) => {
         return recipe.ustensils
           .map((ustensil) => {
@@ -87,17 +163,21 @@ class Index {
           .flat();
       })
       .flat();
-    this.ustencilListUnique = [...new Set(ustencilList)];
-
-    this.usedIngredientList = this.ingredientListUnique;
-    this.usedApplianceList = this.applianceListUnique;
-    this.usedUstencilList = this.ustencilListUnique;
+    this.usedUstencilList = [];
+    this.usedUstencilList = [...new Set(ustencilList)];
   }
 
-  fillDropdownIngredient() {
+  fillDropdownIngredient(list = null) {
+    let listIngredient;
+    if (list === null) {
+      listIngredient = this.usedIngredientList;
+    } else {
+      listIngredient = list;
+    }
+
     this.dropdownIngredient.querySelector(".dropdown-menu").innerHTML = "";
 
-    this.usedIngredientList.forEach((ingredient) => {
+    listIngredient.forEach((ingredient) => {
       if (!this.selectedIngredient.includes(ingredient)) {
         const ingredientRow = document.createElement("li");
         ingredientRow.innerText = ingredient;
@@ -111,10 +191,17 @@ class Index {
     });
   }
 
-  fillDropdownAppliance() {
+  fillDropdownAppliance(list = null) {
+    let listAppliance;
+    if (list === null) {
+      listAppliance = this.usedApplianceList;
+    } else {
+      listAppliance = list;
+    }
+
     this.dropdownAppliance.querySelector(".dropdown-menu").innerHTML = "";
 
-    this.usedApplianceList.forEach((appliance) => {
+    listAppliance.forEach((appliance) => {
       if (!this.selectedAppliance.includes(appliance)) {
         const applianceRow = document.createElement("li");
         applianceRow.innerText = appliance;
@@ -128,10 +215,17 @@ class Index {
     });
   }
 
-  fillDropdownUstensil() {
+  fillDropdownUstensil(list = null) {
+    let listUstensil;
+    if (list === null) {
+      listUstensil = this.usedUstencilList;
+    } else {
+      listUstensil = list;
+    }
+
     this.dropdownUstensil.querySelector(".dropdown-menu").innerHTML = "";
 
-    this.usedUstencilList.forEach((ustencil) => {
+    listUstensil.forEach((ustencil) => {
       if (!this.selectedUstensil.includes(ustencil)) {
         const ustencilRow = document.createElement("li");
         ustencilRow.innerText = ustencil;
@@ -179,7 +273,7 @@ class Index {
   }
 
   fillRecipeList() {
-    this.usedRecipeList.forEach((recipe) => {
+    this.recipeListToDisplay.forEach((recipe) => {
       const recipeFactory = new RecipeFactory(recipe);
       this.recipeSection.appendChild(recipeFactory.getRecipeCard());
     });
