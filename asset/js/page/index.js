@@ -105,7 +105,12 @@ class Index {
       return listFilter;
     }
 
-    //do job with listFilter
+    //do job with listFilter    
+    for (let i = 0; i < listFilter.length; i++) {
+      if (listFilter[i].toLowerCase().includes(searchValue.toLowerCase())) {
+        resultList.push(listFilter[i]);
+      }
+    }
 
     return resultList;
   }
