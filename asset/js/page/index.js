@@ -107,6 +107,11 @@ class Index {
       return listFilter;
     }
     //do job with listFilter
+    resultList = listFilter.filter((filter) => {
+      return filter
+        .toLowerCase()
+        .includes(searchValue.toLowerCase());
+    });
 
     return resultList;
   }
@@ -169,8 +174,8 @@ class Index {
     this.usedApplianceList = [];
     this.usedApplianceList = [...new Set(applianceList)];
 
-    let ustencilList = [];
-    ustencilList = this.recipeListToDisplay
+    let ustensilList = [];
+    ustensilList = this.recipeListToDisplay
       .map((recipe) => {
         return recipe.ustensils
           .map((ustensil) => {
@@ -179,8 +184,8 @@ class Index {
           .flat();
       })
       .flat();
-    this.usedUstencilList = [];
-    this.usedUstencilList = [...new Set(ustencilList)];
+    this.usedUstensilList = [];
+    this.usedUstensilList = [...new Set(ustensilList)];
   }
 
   fillDropdownIngredient(list = null) {
@@ -234,23 +239,23 @@ class Index {
   fillDropdownUstensil(list = null) {
     let listUstensil;
     if (list === null) {
-      listUstensil = this.usedUstencilList;
+      listUstensil = this.usedUstensilList;
     } else {
       listUstensil = list;
     }
 
     this.dropdownUstensil.querySelector(".dropdown-menu").innerHTML = "";
 
-    listUstensil.forEach((ustencil) => {
-      if (!this.selectedUstensil.includes(ustencil)) {
-        const ustencilRow = document.createElement("li");
-        ustencilRow.innerText = ustencil;
-        ustencilRow.addEventListener("click", () => {
-          this.toggleFilter(ustencil, "ustensil");
+    listUstensil.forEach((ustensil) => {
+      if (!this.selectedUstensil.includes(ustensil)) {
+        const ustensilRow = document.createElement("li");
+        ustensilRow.innerText = ustensil;
+        ustensilRow.addEventListener("click", () => {
+          this.toggleFilter(ustensil, "ustensil");
         });
         this.dropdownUstensil
           .querySelector(".dropdown-menu")
-          .appendChild(ustencilRow);
+          .appendChild(ustensilRow);
       }
     });
   }
@@ -277,12 +282,12 @@ class Index {
       this.selectedFilterList.appendChild(filter);
     });
 
-    this.selectedUstensil.forEach((ustencil) => {
+    this.selectedUstensil.forEach((ustensil) => {
       const filter = TemplateFactory.getSelectedFilterTemplate();
-      filter.querySelector("span").innerText = ustencil;
+      filter.querySelector("span").innerText = ustensil;
       filter.classList.add("ustensil");
       filter.querySelector("em").addEventListener("click", () => {
-        this.toggleFilter(ustencil, "ustensil");
+        this.toggleFilter(ustensil, "ustensil");
       });
       this.selectedFilterList.appendChild(filter);
     });
