@@ -97,8 +97,27 @@ class Index {
         );
       });
     }
+
+    this.applyFilter();
+    
     this.gatherFilterData();
-    this.fillRecipeList();
+    this.fillDOM();
+  }
+
+  applyFilter() {
+    this.recipeListToDisplay =  this.recipeListToDisplay.filter((recipe) => {
+      return this.selectedIngredient.every((ingredient) => {
+        return recipe.ingredients.some((recipeIngredient) => {  
+          return recipeIngredient.ingredient === ingredient;
+        });
+      }) && this.selectedAppliance.every((appliance) => {
+        return recipe.appliance === appliance;
+      }) && this.selectedUstensil.every((ustensil) => {
+        return recipe.ustensils.some((recipeUstensil) => {
+          return recipeUstensil === ustensil;
+        });
+      });
+    });
   }
 
   searchFiltersInList(listFilter, searchValue) {
@@ -108,9 +127,7 @@ class Index {
     }
     //do job with listFilter
     resultList = listFilter.filter((filter) => {
-      return filter
-        .toLowerCase()
-        .includes(searchValue.toLowerCase());
+      return filter.toLowerCase().includes(searchValue.toLowerCase());
     });
 
     return resultList;
@@ -347,6 +364,7 @@ class Index {
         break;
     }
     this.fillSelectedFilterList();
+    this.searchRecipe();
   }
 
   closeAllDropdown() {
