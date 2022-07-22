@@ -95,8 +95,54 @@ class Index {
       }
     }
 
+    this.applyFilters();
+
     this.gatherFilterData();
-    this.fillRecipeList();
+    this.fillDOM();
+  }
+
+  applyFilters(){
+    let listRecipe = [];
+    for(let i = 0; i < this.recipeListToDisplay.length; i++){
+      let hasIngredient = true;
+      let hasAppliance = true;
+      let hasUstensil = true;
+      for(let y = 0; y < this.selectedIngredient.length; y++){
+        let hasOneIngredient = false;
+        for (let z = 0; z < this.recipeListToDisplay[i].ingredients.length; z++) {
+          if(this.recipeListToDisplay[i].ingredients[z].ingredient.toLowerCase() === this.selectedIngredient[y].toLowerCase()){
+            hasOneIngredient = true;
+          }
+        }
+        if(!hasOneIngredient){
+          hasIngredient = false;
+        }
+      }
+      
+      for(let y = 0; y < this.selectedAppliance.length; y++){
+        if(this.recipeListToDisplay[i].appliance.toLowerCase() !== this.selectedAppliance[y].toLowerCase()){
+          hasAppliance = false;
+        }
+      }
+
+      for(let y = 0; y < this.selectedUstensil.length; y++){
+        let hasOneUstensil = false;
+        for (let z = 0; z < this.recipeListToDisplay[i].ustensils.length; z++) {
+          if(this.recipeListToDisplay[i].ustensils[z].toLowerCase() === this.selectedUstensil[y].toLowerCase()){
+            hasOneUstensil = true;
+          }
+        }
+        if(!hasOneUstensil){
+          hasUstensil = false;
+        }
+      }
+
+      if(hasIngredient && hasAppliance && hasUstensil ){
+        listRecipe.push(this.recipeListToDisplay[i]);
+      }
+    } 
+    this.recipeListToDisplay = [];
+    this.recipeListToDisplay = listRecipe;
   }
 
   searchFiltersInList(listFilter, searchValue) {
@@ -345,6 +391,7 @@ class Index {
         this.fillDropdownUstensil();
         break;
     }
+    this.searchRecipe();
     this.fillSelectedFilterList();
   }
 
