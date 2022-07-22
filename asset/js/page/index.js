@@ -78,6 +78,21 @@ class Index {
       this.recipeListToDisplay = this.recipeList;
     } else {
       //do job with searchField
+      this.recipeListToDisplay = [];
+      for (let i = 0; i < this.recipeList.length; i++) {
+        let isSearchValueInIngredient = false;
+        for(let y = 0; y < this.recipeList[i].ingredients.length; y++){
+          if(this.recipeList[i].ingredients[y].ingredient.toLowerCase().includes(this.searchField.value.toLowerCase())){
+            isSearchValueInIngredient = true;
+          }
+        }
+        if ( this.recipeList[i].name.toLowerCase().includes(this.searchField.value.toLowerCase()) ||
+          this.recipeList[i].description.toLowerCase().includes(this.searchField.value.toLowerCase()) 
+          || isSearchValueInIngredient) 
+        {
+          this.recipeListToDisplay.push(this.recipeList[i]);
+        }
+      }
     }
 
     this.gatherFilterData();
@@ -86,7 +101,7 @@ class Index {
 
   searchFiltersInList(listFilter, searchValue) {
     let resultList = [];
-    if(searchValue.length < 1) {
+    if (searchValue.length < 1) {
       return listFilter;
     }
 
@@ -272,7 +287,7 @@ class Index {
     });
   }
 
-  fillRecipeList() {    
+  fillRecipeList() {
     this.recipeSection.innerHTML = "";
     this.recipeListToDisplay.forEach((recipe) => {
       const recipeFactory = new RecipeFactory(recipe);
