@@ -78,24 +78,40 @@ class Index {
       this.recipeListToDisplay = this.recipeList;
     } else {
       //do job with searchField
+      this.recipeListToDisplay = this.recipeList.filter((recipe) => {
+        const ingredientList = recipe.ingredients.map((ingredient) => {
+          return ingredient.ingredient;
+        });
+        return (
+          recipe.name
+            .toLowerCase()
+            .includes(this.searchField.value.toLowerCase()) ||
+          recipe.description
+            .toLowerCase()
+            .includes(this.searchField.value.toLowerCase()) ||
+          ingredientList.some((ingredient) => {
+            return ingredient
+              .toLowerCase()
+              .includes(this.searchField.value.toLowerCase());
+          })
+        );
+      });
     }
-
     this.gatherFilterData();
     this.fillRecipeList();
   }
 
   searchFiltersInList(listFilter, searchValue) {
     let resultList = [];
-    if(searchValue.length < 1) {
+    if (searchValue.length < 1) {
       return listFilter;
     }
-
     //do job with listFilter
 
     return resultList;
   }
 
-  searchIgredient() {
+  searchIngredient() {
     let searchValue = this.dropdownIngredientSearch.value;
     let resultList = this.searchFiltersInList(
       this.usedIngredientList,
@@ -273,6 +289,7 @@ class Index {
   }
 
   fillRecipeList() {
+    this.recipeSection.innerHTML = "";
     this.recipeListToDisplay.forEach((recipe) => {
       const recipeFactory = new RecipeFactory(recipe);
       this.recipeSection.appendChild(recipeFactory.getRecipeCard());
