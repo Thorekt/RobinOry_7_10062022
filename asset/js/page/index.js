@@ -98,23 +98,23 @@ class Index {
       });
     }
 
-    this.applyFilter();
+    this.applyFilters();
     
     this.gatherFilterData();
     this.fillDOM();
   }
 
-  applyFilter() {
+  applyFilters() {
     this.recipeListToDisplay =  this.recipeListToDisplay.filter((recipe) => {
       return this.selectedIngredient.every((ingredient) => {
         return recipe.ingredients.some((recipeIngredient) => {  
-          return recipeIngredient.ingredient === ingredient;
+          return recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase();
         });
       }) && this.selectedAppliance.every((appliance) => {
-        return recipe.appliance === appliance;
+        return recipe.appliance.toLowerCase() === appliance.toLowerCase();
       }) && this.selectedUstensil.every((ustensil) => {
         return recipe.ustensils.some((recipeUstensil) => {
-          return recipeUstensil === ustensil;
+          return recipeUstensil.toLowerCase() === ustensil.toLowerCase();
         });
       });
     });
