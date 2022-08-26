@@ -82,6 +82,8 @@ class Index {
         const ingredientList = recipe.ingredients.map((ingredient) => {
           return ingredient.ingredient;
         });
+
+        
         return (
           recipe.name
             .toLowerCase()

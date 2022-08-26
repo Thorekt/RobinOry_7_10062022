@@ -281,10 +281,15 @@ section {
 .recipe-content ul,.recipe-content p{
   width: 170px;
   max-width: 170px;
+  max-height: 110px;
   margin: 0;
   padding: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.recipe-content p{  
+  overflow-y: scroll;
 }
 
 .recipe-content ul{
