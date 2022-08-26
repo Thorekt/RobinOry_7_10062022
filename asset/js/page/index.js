@@ -86,6 +86,8 @@ class Index {
             isSearchValueInIngredient = true;
           }
         }
+
+        
         if ( this.recipeList[i].name.toLowerCase().includes(this.searchField.value.toLowerCase()) ||
           this.recipeList[i].description.toLowerCase().includes(this.searchField.value.toLowerCase()) 
           || isSearchValueInIngredient) 
